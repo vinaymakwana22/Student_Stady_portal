@@ -1,0 +1,65 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  body {
+    background: #f0f2f5;
+  }
+
+  .register-container {
+    max-width: 480px;
+    margin: 80px auto;
+    padding: 40px 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .btn-signup {
+    width: 100%;
+    background-color: #198754;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-signup:hover {
+    background-color: #157347;
+  }
+
+  .bottom-text {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .bottom-text a {
+    color: #0d6efd;
+  }
+</style>
+
+<div class="register-container">
+  <h2>Join Today</h2>
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="form-group mt-3">
+      <button type="submit" class="btn btn-signup">
+        Sign Up
+      </button>
+    </div>
+  </form>
+  <div class="bottom-text">
+    <small class="text-muted">Already have an account?
+      <a href="{% url 'login' %}">Sign In</a>
+    </small>
+  </div>
+</div>
+{% endblock content %}

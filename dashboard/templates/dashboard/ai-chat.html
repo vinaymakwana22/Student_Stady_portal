@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  .ai-header {
+    text-align: center;
+    margin: 2rem auto 1rem;
+    max-width: 700px;
+  }
+  .ai-header img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+  .ai-header h2 {
+    color: #00adb5;
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+
+  .chat-page {
+    min-height: 100vh;
+    background: #101820;
+    padding: 20px 10px 40px;
+    color: #fff;
+  }
+
+  .alert-closed {
+    background-color: #ffdddd;
+    color: #800000;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<section class="chat-page">
+  <!-- 🧠 AI Image Section -->
+  <div class="ai-header">
+    <img src="{% static 'images/chat.jpg' %}" alt="AI Technology Image" />
+    <h2>AI Assistant Chat</h2>
+  </div>
+
+  <!-- ❌ Feature Closed Message -->
+  <div class="alert-closed">
+    🚫 The AI Assistant feature is temporarily closed. Please check back later!
+  </div>
+</section>
+{% endblock %}

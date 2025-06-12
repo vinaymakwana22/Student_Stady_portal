@@ -1,0 +1,66 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="text-center container">
+    <h2>Student Dictionary</h2>
+    <p>Enter any word to get the phonetics, definition, and an example for the word.</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-danger" type="submit" value="Search">
+    </form>
+
+    <br>
+
+    <div class="content-section p-0 mt-5">
+        {% if input %}
+        <div class="custom-header">
+            <h2>{{ input }}</h2>
+            {% if phonetics %}
+                <h6>{{ phonetics }}</h6>
+            {% endif %}
+
+            {% if audio %}
+            <div>
+                <audio id="player" src="{{ audio }}"></audio>
+                <a onclick="document.getElementById('player').play()" style="cursor: pointer;">
+                    <i class="fa fa-volume-up fa-2x"></i>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <hr class="p-0 m-0">
+
+        <div class="text-left mt-3">
+            {% if definition %}
+                <h4><strong>Definition:</strong> {{ definition }}</h4>
+            {% endif %}
+            {% if example %}
+                <h4><strong>Example:</strong> {{ example }}</h4>
+            {% endif %}
+
+            {% if synonyms %}
+                <h4><strong>Synonyms:</strong></h4>
+                <ul>
+                    {% for synonym in synonyms %}
+                        <li>{{ synonym }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p><strong>Synonyms:</strong> Not available</p>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        {% elif error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% else %}
+            <h4>No word entered or no result found.</h4>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

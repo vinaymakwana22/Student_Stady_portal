@@ -1,0 +1,150 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1d1f27, #2b2d42);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 60px 20px;
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .hero-content h1 {
+    font-size: 3.2rem;
+    font-weight: bold;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    color: #e0e0e0;
+  }
+
+  .cta-btn {
+    margin-top: 30px;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    background-color: #00adb5;
+    color: white;
+    transition: 0.3s;
+  }
+
+  .cta-btn:hover {
+    background-color: #008891;
+    transform: scale(1.05);
+  }
+
+  .feature-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+  }
+
+  .feature-card {
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background: #fff;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-card img {
+    height: 150px;
+    object-fit: contain;
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-content {
+      margin-bottom: 40px;
+    }
+  }
+</style>
+
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Hero Text -->
+      <div class="col-md-6 hero-content">
+        <h1>📘 Welcome to Study Portal</h1>
+        <p>Your smart assistant for all academic needs. Stay organized, focused, and productive – all in one place!</p>
+        <a href="#features" class="btn cta-btn">🚀 Explore Features</a>
+      </div>
+
+      <!-- Hero Illustration -->
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/study.jpeg' %}" alt="Study Illustration" class="img-fluid" style="max-height: 300px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="feature-section" id="features">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2>🧰 What Can You Do Here?</h2>
+      <p class="text-muted">Everything you need to stay on top of your studies is just a click away.</p>
+    </div>
+
+    <div class="row">
+      {% for item in features %}
+      <div class="col-md-4 mb-4">
+        <a href="{% url item.url %}" class="text-decoration-none">
+          <div class="card feature-card h-100 text-center">
+            <img src="{% static item.image %}" class="card-img-top mx-auto d-block" alt="{{ item.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <button class="btn btn-outline-primary mt-2" onclick="showWelcome('{{ item.title|escapejs }}')">Go to {{ item.title }}</button>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-white mt-5" style="background-color: #1d1f27; padding: 20px;">
+  <div class="container">
+    <p class="mb-1">Made with ❤️ by Vinay Makwana</p>
+    <p class="mb-0">
+      📧 <a href="mailto:vinaymakwana@gmail.com" class="text-info text-decoration-none">vinaymakwana@gmail.com</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  function showWelcome(title) {
+    alert(`✅ You're all set! Welcome to: ${title} 🚀`);
+  }
+</script>
+{% endblock %}

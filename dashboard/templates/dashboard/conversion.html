@@ -1,0 +1,106 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  .conversion-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    background: #f9fafb;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.08);
+  }
+
+  legend {
+    font-weight: 700;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #17a2b8;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1.5rem;
+    color: #0d6efd;
+  }
+
+  .btn-outline-info {
+    font-weight: 600;
+    padding: 0.5rem 1.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .btn-outline-info:hover {
+    background-color: #0dcaf0;
+    color: #fff;
+    border-color: #0dcaf0;
+  }
+
+  .result-box {
+    background: #e0f7fa;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.8rem;
+    box-shadow: inset 0 0 8px #81d4fa;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #006064;
+  }
+
+  .form-group > .form-control, 
+  .form-group > select {
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1.5px solid #17a2b8;
+    transition: border-color 0.3s ease;
+  }
+  .form-group > .form-control:focus,
+  .form-group > select:focus {
+    border-color: #0dcaf0;
+    box-shadow: 0 0 8px #0dcaf0;
+  }
+
+  @media (max-width: 576px) {
+    .conversion-container {
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem auto;
+    }
+  }
+</style>
+
+<div class="conversion-container">
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    
+    <fieldset>
+      <legend>Unit Conversion</legend>
+      {{ form|crispy }}
+      <button class="btn btn-outline-info mt-3" type="submit">Select</button>
+    </fieldset>
+
+    {% if input %}
+    <fieldset class="mt-4">
+      <legend>Enter Values</legend>
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-4">
+          {{ m_form.input|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+          {{ m_form.measure1|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+          {{ m_form.measure2|as_crispy_field }}
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="result-box text-center mt-4">
+      Result: {{ answer }}
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-info" type="submit">Convert</button>
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+{% endblock content %}

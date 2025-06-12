@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="text-center container mt-5">
+    <h2>Search Articles on Wikipedia</h2>
+    <p>Just enter a search query to obtain results. <strong>Enter without any space</strong></p>
+    
+    <form method="post" class="my-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger">Search</button>
+    </form>
+
+    {% if title and link and details %}
+    <div class="container">
+        <div class="content-section p-3 mt-4 border rounded">
+            <a href="{{ link }}" target="_blank" class="text-decoration-none text-dark">
+                <div class="custom-header">
+                    <h2>{{ title }}</h2>
+                    <h6 class="text-muted">{{ link }}</h6>
+                </div>
+            </a>
+            <hr>
+            <p class="description mt-3 text-start">
+                {{ details }}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock content %}
